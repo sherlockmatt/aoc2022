@@ -1,2 +1,2 @@
-# aoc2020
-Puzzles from https://adventofcode.com for 2020
+# aoc2022
+Puzzles from https://adventofcode.com for 2022
