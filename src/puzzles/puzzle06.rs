@@ -4,36 +4,21 @@ use std::collections::HashSet;
 pub fn run(input: String) -> Vec<String> {
     let mut answers = Vec::new();
 
-    answers.push(format!(
-        "{}",
-        input
-            .chars()
-            .tuple_windows()
-            .position(|(a, b, c, d)| HashSet::from([a, b, c, d]).len() == 4)
-            .expect("No marker")
-            + 4 // The puzzle wants the index of the end of the marker, so add the width of the marker
-    ));
+    answers.push(format!("{}", first_unique_window::<4>(input.as_str())));
 
-    // .tuple_windows() has a max size of 12, so do some filth to hack in a 14-window
-    answers.push(format!(
-        "{}",
-        input
-            .chars()
-            .tuple_windows()
-            .tuple_windows()
-            .position(
-                |(
-                    (a, b, c, d, e, f, g, h, i, j, k, l),
-                    (_, _, _, _, _, _, _, _, _, _, _, m),
-                    (_, _, _, _, _, _, _, _, _, _, _, n),
-                )| HashSet::from([a, b, c, d, e, f, g, h, i, j, k, l, m, n]).len()
-                    == 14
-            )
-            .expect("No message")
-            + 14 // The puzzle wants the index of the end of the marker, so add the width of the marker
-    ));
+    answers.push(format!("{}", first_unique_window::<14>(input.as_str())));
 
     return answers;
+}
+
+fn first_unique_window<const LENGTH: usize>(signal: &str) -> usize {
+    signal
+        .chars()
+        .collect_vec()
+        .windows(LENGTH)
+        .position(|arr| arr.iter().cloned().collect::<HashSet<char>>().len() == LENGTH)
+        .expect("No window found")
+        + LENGTH // The puzzle wants the index of the end of the window, so add the width of the window
 }
 
 #[cfg(test)]
