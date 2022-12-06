@@ -1,7 +1,7 @@
 use itertools::Itertools;
 use crate::utils::parse_usize;
 
-pub fn run(input: String) -> Vec<String> {
+pub fn run(input: &str) -> Vec<String> {
     let mut answers = Vec::new();
 
     let ranges = input
@@ -52,8 +52,7 @@ mod tests {
 5-7,7-9
 2-8,3-7
 6-6,4-6
-2-6,4-8"
-            .to_string();
+2-6,4-8";
         assert_eq!(run(input), vec!["2".to_string(), "4".to_string()]);
     }
 }

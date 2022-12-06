@@ -1,4 +1,4 @@
-pub fn run(input: String) -> Vec<String> {
+pub fn run(input: &str) -> Vec<String> {
     let mut answers = Vec::new();
 
     answers.push(format!(
@@ -50,8 +50,7 @@ mod tests {
     fn example1() {
         let input = "A Y
 B X
-C Z"
-        .to_string();
+C Z";
         assert_eq!(run(input), vec!["15".to_string(), "12".to_string()]);
     }
 }

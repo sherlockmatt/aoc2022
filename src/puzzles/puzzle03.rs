@@ -1,7 +1,7 @@
 use itertools::Itertools;
 use std::collections::HashSet;
 
-pub fn run(input: String) -> Vec<String> {
+pub fn run(input: &str) -> Vec<String> {
     let mut answers = Vec::new();
 
     answers.push(format!(
@@ -44,7 +44,7 @@ fn char_to_priority(c: &char) -> u32 {
     match c {
         &c @ 'a'..='z' => c as u32 - 96,
         &c @ 'A'..='Z' => c as u32 - 38,
-        other => panic!("Weird character {other:?}"),
+        other => panic!("Weird character {:?}", other),
     }
 }
 
@@ -59,8 +59,7 @@ jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
 PmmdzqPrVvPwwTWBwg
 wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
 ttgJtRGJQctTZtZT
-CrZsJsPPZsGzwwsLwLmpwMDw"
-            .to_string();
+CrZsJsPPZsGzwwsLwLmpwMDw";
         assert_eq!(run(input), vec!["157".to_string(), "70".to_string()]);
     }
 }

@@ -1,7 +1,7 @@
 use crate::utils::parse_usize;
 use itertools::Itertools;
 
-pub fn run(input: String) -> Vec<String> {
+pub fn run(input: &str) -> Vec<String> {
     let mut answers = Vec::new();
 
     let (input_crates, input_moves): (&str, &str) =
@@ -76,8 +76,7 @@ mod tests {
 move 1 from 2 to 1
 move 3 from 1 to 3
 move 2 from 2 to 1
-move 1 from 1 to 2"
-            .to_string();
+move 1 from 1 to 2";
         assert_eq!(run(input), vec!["CMZ".to_string(), "MCD".to_string()]);
     }
 }

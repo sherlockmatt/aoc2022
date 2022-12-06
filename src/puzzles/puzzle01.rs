@@ -1,7 +1,7 @@
 use crate::utils::parse_usize;
 use itertools::Itertools;
 
-pub fn run(input: String) -> Vec<String> {
+pub fn run(input: &str) -> Vec<String> {
     let mut answers = Vec::new();
 
     let elves = input
@@ -36,8 +36,7 @@ mod tests {
 8000
 9000
 
-10000"
-            .to_string();
+10000";
         assert_eq!(run(input), vec!["24000".to_string(), "45000".to_string()]);
     }
 }

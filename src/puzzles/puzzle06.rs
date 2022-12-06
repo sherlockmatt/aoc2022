@@ -1,12 +1,12 @@
 use itertools::Itertools;
 use std::collections::HashSet;
 
-pub fn run(input: String) -> Vec<String> {
+pub fn run(input: &str) -> Vec<String> {
     let mut answers = Vec::new();
 
-    answers.push(format!("{}", first_unique_window::<4>(input.as_str())));
+    answers.push(format!("{}", first_unique_window::<4>(input)));
 
-    answers.push(format!("{}", first_unique_window::<14>(input.as_str())));
+    answers.push(format!("{}", first_unique_window::<14>(input)));
 
     return answers;
 }
@@ -27,31 +27,31 @@ mod tests {
 
     #[test]
     fn example1() {
-        let input = "mjqjpqmgbljsphdztnvjfqwrcgsmlb".to_string();
+        let input = "mjqjpqmgbljsphdztnvjfqwrcgsmlb";
         assert_eq!(run(input), vec!["7".to_string(), "19".to_string()]);
     }
 
     #[test]
     fn example2() {
-        let input = "bvwbjplbgvbhsrlpgdmjqwftvncz".to_string();
+        let input = "bvwbjplbgvbhsrlpgdmjqwftvncz";
         assert_eq!(run(input), vec!["5".to_string(), "23".to_string()]);
     }
 
     #[test]
     fn example3() {
-        let input = "nppdvjthqldpwncqszvftbrmjlhg".to_string();
+        let input = "nppdvjthqldpwncqszvftbrmjlhg";
         assert_eq!(run(input), vec!["6".to_string(), "23".to_string()]);
     }
 
     #[test]
     fn example4() {
-        let input = "nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg".to_string();
+        let input = "nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg";
         assert_eq!(run(input), vec!["10".to_string(), "29".to_string()]);
     }
 
     #[test]
     fn example5() {
-        let input = "zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw".to_string();
+        let input = "zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw";
         assert_eq!(run(input), vec!["11".to_string(), "26".to_string()]);
     }
 }

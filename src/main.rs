@@ -5,7 +5,6 @@ extern crate exitfailure;
 // extern crate lazy_static;
 
 use exitfailure::ExitFailure;
-use failure::ResultExt;
 use std::time::Instant;
 use structopt::StructOpt;
 
@@ -24,13 +23,11 @@ struct Cli {
 
 fn main() -> Result<(), ExitFailure> {
     let args = Cli::from_args();
-    let session = std::fs::read_to_string(&args.session)
-        .with_context(|_| format!("Could not read session file `{}`", &args.session.display()))?;
 
     for i in utils::parse_range(args.num)? {
         println!("Starting puzzle number {}", i);
 
-        let puzzle_input = utils::download(i, session.trim()).unwrap_or_else(|e| {
+        let puzzle_input = utils::download(i, &args.session).unwrap_or_else(|e| {
             println!("ERROR: {}", e);
             return String::from("");
         });
@@ -39,7 +36,7 @@ fn main() -> Result<(), ExitFailure> {
         if &puzzle_input != "" {
             // Start timing here because there's little point timing the download
             let start_time = Instant::now();
-            let puzzle_answers = puzzles::run(i, puzzle_input).unwrap_or_else(|e| {
+            let puzzle_answers = puzzles::run(i, &puzzle_input).unwrap_or_else(|e| {
                 println!("ERROR: {}", e);
                 return vec![];
             });

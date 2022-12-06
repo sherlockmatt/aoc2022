@@ -4,14 +4,16 @@ use failure::_core::ops::{Add, AddAssign, Mul};
 use failure::_core::str::FromStr;
 use failure::{Error, ResultExt};
 use std::collections::{BinaryHeap, HashMap, HashSet};
-use std::path::Path;
+use std::path::{Path, PathBuf};
 
-pub fn download(puzzle_number: usize, session: &str) -> Result<String, Error> {
+pub fn download(puzzle_number: usize, session_path: &PathBuf) -> Result<String, Error> {
     let input_path_str = format!("./inputs/day{}.txt", puzzle_number);
     let input_path = Path::new(&input_path_str);
 
     // If we don't already have this input downloaded, download it now
     if !input_path.exists() {
+        let session = std::fs::read_to_string(session_path)
+            .with_context(|_| format!("Could not read session file `{}`", session_path.display()))?;
         let url_to_get = format!("https://adventofcode.com/2022/day/{}/input", puzzle_number);
         let client = reqwest::blocking::Client::new();
         if !input_path.parent().unwrap().exists() {

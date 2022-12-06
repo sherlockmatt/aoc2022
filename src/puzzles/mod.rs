@@ -27,8 +27,8 @@ mod puzzle23;
 mod puzzle24;
 mod puzzle25;
 
-pub fn run(puzzle_number: usize, input: String) -> Result<Vec<String>, Error> {
-    let puzzle_functions: [&dyn Fn(String) -> Vec<String>; 25] = [
+pub fn run(puzzle_number: usize, input: &str) -> Result<Vec<String>, Error> {
+    let puzzle_functions: [&dyn Fn(&str) -> Vec<String>; 25] = [
         &puzzle01::run,
         &puzzle02::run,
         &puzzle03::run,
