@@ -28,7 +28,7 @@ pub fn download(puzzle_number: usize, session_path: &PathBuf) -> Result<String, 
             input_path,
             client
                 .get(&url_to_get)
-                .header("cookie", format!("session={}", session))
+                .header("cookie", format!("session={}", session.trim()))
                 .send()?
                 .text()
                 .with_context(|_| format!("Could not download from URL {}", url_to_get))?,
